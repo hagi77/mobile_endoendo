@@ -23,7 +23,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'EndoEndo',
-      theme: appTheme,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: primaryColor,
+        backgroundColor: surfaceColor,
+        scaffoldBackgroundColor: surfaceColor,
+        appBarTheme:
+            const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
+        fontFamily: 'Roboto',
+        textTheme: textThemes,
+      ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: const DashboardWidget(title: 'Flutter Demo Home Page'),
