@@ -1,17 +1,10 @@
-class DashboardViewModel {
+import 'package:mobile_endoendo/core/base_view_model.dart';
+
+class DashboardViewModel extends BaseViewModel {
   var counter = 0;
-  void Function()? _listener;
 
   void increaseCounter() {
     counter++;
-    _listener?.call();
-  }
-
-  void addListener(void Function() update) {
-    _listener = update;
-  }
-
-  void removeListener() {
-    _listener = null;
+    callback?.call();
   }
 }

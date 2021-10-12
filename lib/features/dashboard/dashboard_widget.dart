@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:mobile_endoendo/core/base_widget_state.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 
 class DashboardWidget extends StatefulWidget {
@@ -12,25 +12,8 @@ class DashboardWidget extends StatefulWidget {
   State<DashboardWidget> createState() => _DashboardState();
 }
 
-class _DashboardState extends State<DashboardWidget> {
-  var viewModel = GetIt.I<DashboardViewModel>();
-
-  void update() {
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    viewModel.addListener(update);
-  }
-
-  @override
-  void dispose() {
-    viewModel.removeListener();
-    super.dispose();
-  }
-
+class _DashboardState
+    extends BaseWidgetState<DashboardWidget, DashboardViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
