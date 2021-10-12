@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 
+import 'core/theme.dart';
 import 'features/dashboard/dashboard_widget.dart';
 
 void main() {
@@ -21,10 +22,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      title: 'EndoEndo',
+      theme: appTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: const DashboardWidget(title: 'Flutter Demo Home Page'),

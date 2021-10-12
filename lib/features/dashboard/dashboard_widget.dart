@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mobile_endoendo/core/base_widget_state.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 
@@ -18,7 +19,14 @@ class _DashboardState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.search,
+                color: Colors.black,
+              ))
+        ],
       ),
       body: Center(
         child: Column(
@@ -34,12 +42,18 @@ class _DashboardState
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          viewModel.increaseCounter();
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: const Icon(Icons.home),
+              label: AppLocalizations.of(context)?.appBarHome),
+          BottomNavigationBarItem(
+              icon: const Icon(Icons.menu_book_outlined),
+              label: AppLocalizations.of(context)?.appBarGuide),
+          BottomNavigationBarItem(
+              icon: const Icon(Icons.favorite),
+              label: AppLocalizations.of(context)?.appBarFavorites),
+        ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
