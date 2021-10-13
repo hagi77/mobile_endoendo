@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const DashboardWidget(title: 'Flutter Demo Home Page'),
+      home: const DashboardWidget(),
     );
   }
 }

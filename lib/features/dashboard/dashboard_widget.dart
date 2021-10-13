@@ -8,9 +8,7 @@ import 'package:mobile_endoendo/widgets/article_thumb_widget.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
 
 class DashboardWidget extends StatefulWidget {
-  const DashboardWidget({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const DashboardWidget({Key? key}) : super(key: key);
 
   @override
   State<DashboardWidget> createState() => _DashboardState();
