@@ -6,6 +6,7 @@ import 'package:mobile_endoendo/core/values.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/widgets/article_thumb_widget.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
+import 'package:mobile_endoendo/widgets/progress_widget.dart';
 
 class DashboardWidget extends StatefulWidget {
   const DashboardWidget({Key? key}) : super(key: key);
@@ -33,21 +34,19 @@ class _DashboardState
           future: viewModel.getNews(),
           builder: (BuildContext context,
               AsyncSnapshot<List<ArticleUiModel>> snapshot) {
-            Widget child = Text('dd');
-
             if (snapshot.hasData && snapshot.requireData.isNotEmpty) {
-              child = Container(
+              return Container(
                 padding: const EdgeInsets.fromLTRB(
                     marginRegular, 0, marginRegular, marginRegular),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: getNewsSection(snapshot.requireData)),
               );
-            } else if (snapshot.hasError) {
-              child = ExceptionWidget();
             }
-
-            return child;
+            if (snapshot.hasError) {
+              return const ExceptionWidget();
+            }
+            return const ProgressWidget();
           }),
       bottomNavigationBar: BottomNavigationBar(
         items: [

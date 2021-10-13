@@ -4,5 +4,6 @@
   "appBarFavorites": "Schowek",
   "dashboardNewsTitle": "Nowości",
   "dashboardGuideTitle": "Przewodnik",
-  "generalException": "Błąd :("
+  "generalException": "Błąd :(",
+  "generalLoading": "Pracuję..."
 }

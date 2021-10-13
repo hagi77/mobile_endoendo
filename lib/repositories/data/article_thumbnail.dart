@@ -5,6 +5,5 @@ class ArticleThumbnail {
 
   final String subtitle;
 
-  const ArticleThumbnail(
-      String this.thumbUrl, String this.title, String this.subtitle);
+  const ArticleThumbnail(this.thumbUrl, this.title, this.subtitle);
 }

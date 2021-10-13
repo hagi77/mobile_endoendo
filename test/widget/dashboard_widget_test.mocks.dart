@@ -32,7 +32,7 @@ class MockArticlesRepository extends _i1.Mock
       Invocation.method(#getNews, []),
       returnValue: Future<List<_i4.ArticleThumbnail>>.value(
           <_i4.ArticleThumbnail>[])) as _i3.Future<List<_i4.ArticleThumbnail>>);
-
   @override
+  // ignore: unnecessary_overrides
   String toString() => super.toString();
 }
