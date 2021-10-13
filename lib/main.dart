@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
+import 'package:mobile_endoendo/repositories/articles_repository.dart';
 
 import 'core/theme.dart';
 import 'features/dashboard/dashboard_widget.dart';
@@ -12,7 +13,11 @@ void main() {
 }
 
 void setupDI() {
-  GetIt.I.registerSingleton<DashboardViewModel>(DashboardViewModel());
+  GetIt.I.registerSingletonAsync<ArticlesRepository>(
+      () async => ArticlesRepoMock());
+  GetIt.I.registerSingletonWithDependencies<DashboardViewModel>(
+      () => DashboardViewModel(),
+      dependsOn: [ArticlesRepository]);
 }
 
 class MyApp extends StatelessWidget {

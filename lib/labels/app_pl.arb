@@ -3,5 +3,6 @@
   "appBarGuide": "Przewodnik",
   "appBarFavorites": "Schowek",
   "dashboardNewsTitle": "Nowości",
-  "dashboardGuideTitle": "Przewodnik"
+  "dashboardGuideTitle": "Przewodnik",
+  "generalException": "Błąd :("
 }

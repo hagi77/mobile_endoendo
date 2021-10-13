@@ -5,6 +5,7 @@ import 'package:mobile_endoendo/core/base_widget_state.dart';
 import 'package:mobile_endoendo/core/values.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/widgets/article_thumb_widget.dart';
+import 'package:mobile_endoendo/widgets/exception_widget.dart';
 
 class DashboardWidget extends StatefulWidget {
   const DashboardWidget({Key? key, required this.title}) : super(key: key);
@@ -30,26 +31,26 @@ class _DashboardState
               ))
         ],
       ),
-      body: Container(
-          padding: const EdgeInsets.fromLTRB(
-              marginRegular, 0, marginRegular, marginRegular),
-          child: Expanded(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.only(bottom: marginMedium),
-                    child: Text(
-                      AppLocalizations.of(context)?.dashboardNewsTitle ?? "",
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
-                  ),
-                  ArticleThumbnailWidget(
-                      "_thumbnailUrl", "_title", "_subtitle"),
-                  ArticleThumbnailWidget(
-                      "_thumbnailUrl", "_title2", "_subtitle2"),
-                ]),
-          )),
+      body: FutureBuilder(
+          future: viewModel.getNews(),
+          builder: (BuildContext context,
+              AsyncSnapshot<List<ArticleUiModel>> snapshot) {
+            Widget child = Text('dd');
+
+            if (snapshot.hasData && snapshot.requireData.isNotEmpty) {
+              child = Container(
+                padding: const EdgeInsets.fromLTRB(
+                    marginRegular, 0, marginRegular, marginRegular),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: getNewsSection(snapshot.requireData)),
+              );
+            } else if (snapshot.hasError) {
+              child = ExceptionWidget();
+            }
+
+            return child;
+          }),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
@@ -64,5 +65,18 @@ class _DashboardState
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  List<Widget> getNewsSection(List<ArticleUiModel> articles) {
+    var articleWidgets = articles.map((item) => ArticleThumbnailWidget(item));
+    return <Widget>[
+      Container(
+          margin: const EdgeInsets.only(bottom: marginMedium),
+          child: Text(
+            AppLocalizations.of(context)?.dashboardNewsTitle ?? "",
+            style: Theme.of(context).textTheme.headline1,
+          )),
+      ...articleWidgets
+    ];
   }
 }

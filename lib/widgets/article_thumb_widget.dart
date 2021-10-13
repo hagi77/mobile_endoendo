@@ -1,16 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mobile_endoendo/core/values.dart';
+import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 
 class ArticleThumbnailWidget extends StatelessWidget {
-  String _thumbnailUrl;
+  final ArticleUiModel _uiModel;
 
-  String _title;
-
-  String _subtitle;
-
-  ArticleThumbnailWidget(
-      String this._thumbnailUrl, String this._title, String this._subtitle);
+  const ArticleThumbnailWidget(this._uiModel, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Card(
@@ -30,19 +26,19 @@ class ArticleThumbnailWidget extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(
                         marginMedium, marginSmall, marginSmall, marginTiny),
                     child: Text(
-                      _title,
+                      _uiModel.title,
                       style: Theme.of(context).textTheme.headline3,
                       maxLines: 1,
                     )),
                 Padding(
                     padding: const EdgeInsets.fromLTRB(
                         marginMedium, marginTiny, marginSmall, marginSmall),
-                    child: Text(_subtitle,
+                    child: Text(_uiModel.subtitle,
                         style: Theme.of(context).textTheme.bodyText2,
                         maxLines: 2))
               ],
             )),
-            Icon(Icons.navigate_next),
+            const Icon(Icons.navigate_next),
           ],
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
