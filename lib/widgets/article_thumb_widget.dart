@@ -41,7 +41,13 @@ class ArticleThumbnailWidget extends StatelessWidget {
             const Icon(Icons.navigate_next),
           ],
         ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        shape: RoundedRectangleBorder(
+            side: const BorderSide(
+                color: Colors.black,
+                width: outlineThickness,
+                style: BorderStyle.solid),
+            borderRadius: BorderRadius.circular(outlineRadius)),
         clipBehavior: Clip.hardEdge,
+        elevation: 0,
       );
 }
