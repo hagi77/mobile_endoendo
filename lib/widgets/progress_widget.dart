@@ -10,8 +10,7 @@ class ProgressWidget extends StatelessWidget {
   Widget build(BuildContext context) => Center(
           child: Column(children: [
         const Padding(
-            padding: EdgeInsets.all(marginRegular),
-            child: CircularProgressIndicator.adaptive()),
+            padding: EdgeInsets.all(marginRegular), child: CircularProgressIndicator.adaptive()),
         Text(AppLocalizations.of(context)?.generalLoading ?? "")
       ]));
 }

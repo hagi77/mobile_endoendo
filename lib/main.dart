@@ -17,12 +17,10 @@ void main() {
 Future<void> setupDI() {
   GetIt.I.registerSingletonAsync<FirebaseApp>(() => Firebase.initializeApp());
 
-  GetIt.I.registerSingletonWithDependencies<ArticlesRepository>(
-      () => ArticlesRepositoryImpl(),
+  GetIt.I.registerSingletonWithDependencies<ArticlesRepository>(() => ArticlesRepositoryImpl(),
       dependsOn: [FirebaseApp]);
 
-  GetIt.I.registerSingletonWithDependencies<DashboardViewModel>(
-      () => DashboardViewModel(),
+  GetIt.I.registerSingletonWithDependencies<DashboardViewModel>(() => DashboardViewModel(),
       dependsOn: [ArticlesRepository]);
 
   return GetIt.I.allReady();
@@ -47,8 +45,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: primaryColor,
         backgroundColor: surfaceColor,
         scaffoldBackgroundColor: surfaceColor,
-        appBarTheme:
-        const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
         fontFamily: 'Roboto',
         textTheme: textThemes,
       ),

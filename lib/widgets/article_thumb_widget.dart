@@ -15,8 +15,8 @@ class ArticleThumbnailWidget extends StatelessWidget {
             const Image(
               image: AssetImage('lib/images/placeholder.jpg'),
               fit: BoxFit.fitHeight,
-              width: 68,
-              height: 68,
+              width: 76,
+              height: 76,
             ),
             Expanded(
                 child: Column(
@@ -24,18 +24,16 @@ class ArticleThumbnailWidget extends StatelessWidget {
               children: [
                 Padding(
                     padding: const EdgeInsets.fromLTRB(
-                        marginMedium, marginSmall, marginSmall, marginTiny),
+                        marginMedium, marginSmall, marginSmall, marginSmall),
                     child: Text(
                       _uiModel.title,
                       style: Theme.of(context).textTheme.headline3,
                       maxLines: 1,
                     )),
                 Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                        marginMedium, marginTiny, marginSmall, marginSmall),
+                    padding: const EdgeInsets.fromLTRB(marginMedium, 0, marginSmall, marginSmall),
                     child: Text(_uiModel.subtitle,
-                        style: Theme.of(context).textTheme.bodyText2,
-                        maxLines: 2))
+                        style: Theme.of(context).textTheme.bodyText2, maxLines: 2))
               ],
             )),
             const Icon(Icons.navigate_next),
@@ -43,9 +41,7 @@ class ArticleThumbnailWidget extends StatelessWidget {
         ),
         shape: RoundedRectangleBorder(
             side: const BorderSide(
-                color: Colors.black,
-                width: outlineThickness,
-                style: BorderStyle.solid),
+                color: Colors.black, width: outlineThickness, style: BorderStyle.solid),
             borderRadius: BorderRadius.circular(outlineRadius)),
         clipBehavior: Clip.hardEdge,
         elevation: 0,

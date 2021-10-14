@@ -15,8 +15,7 @@ class DashboardWidget extends StatefulWidget {
   State<DashboardWidget> createState() => _DashboardState();
 }
 
-class _DashboardState
-    extends BaseWidgetState<DashboardWidget, DashboardViewModel> {
+class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,12 +31,10 @@ class _DashboardState
       ),
       body: FutureBuilder(
           future: viewModel.getNews(),
-          builder: (BuildContext context,
-              AsyncSnapshot<List<ArticleUiModel>> snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<List<ArticleUiModel>> snapshot) {
             if (snapshot.hasData && snapshot.requireData.isNotEmpty) {
               return Container(
-                padding: const EdgeInsets.fromLTRB(
-                    marginRegular, 0, marginRegular, marginRegular),
+                padding: const EdgeInsets.fromLTRB(marginRegular, 0, marginRegular, marginRegular),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: getNewsSection(snapshot.requireData)),
@@ -51,8 +48,7 @@ class _DashboardState
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-              icon: const Icon(Icons.home),
-              label: AppLocalizations.of(context)?.appBarHome),
+              icon: const Icon(Icons.home), label: AppLocalizations.of(context)?.appBarHome),
           BottomNavigationBarItem(
               icon: const Icon(Icons.menu_book_outlined),
               label: AppLocalizations.of(context)?.appBarGuide),
