@@ -5,8 +5,7 @@
 import 'dart:async' as _i3;
 
 import 'package:mobile_endoendo/repositories/articles_repository.dart' as _i2;
-import 'package:mobile_endoendo/repositories/data/article_thumbnail.dart'
-    as _i4;
+import 'package:mobile_endoendo/repositories/data/article.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -28,10 +27,11 @@ class MockArticlesRepository extends _i1.Mock
   }
 
   @override
-  _i3.Future<List<_i4.ArticleThumbnail>> getNews() => (super.noSuchMethod(
-      Invocation.method(#getNews, []),
-      returnValue: Future<List<_i4.ArticleThumbnail>>.value(
-          <_i4.ArticleThumbnail>[])) as _i3.Future<List<_i4.ArticleThumbnail>>);
+  _i3.Future<List<_i4.Article>> getNews() =>
+      (super.noSuchMethod(Invocation.method(#getNews, []),
+              returnValue: Future<List<_i4.Article>>.value(<_i4.Article>[]))
+          as _i3.Future<List<_i4.Article>>);
+
   @override
   // ignore: unnecessary_overrides
   String toString() => super.toString();

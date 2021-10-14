@@ -36,6 +36,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final Future<void> diSetup = setupDI();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,14 +48,14 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: surfaceColor,
         scaffoldBackgroundColor: surfaceColor,
         appBarTheme:
-            const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
+        const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
         fontFamily: 'Roboto',
         textTheme: textThemes,
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: FutureBuilder(
-          future: setupDI(),
+          future: diSetup,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const ExceptionWidget();

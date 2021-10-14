@@ -12,7 +12,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_widget.dart';
 import 'package:mobile_endoendo/repositories/articles_repository.dart';
-import 'package:mobile_endoendo/repositories/data/article_thumbnail.dart';
+import 'package:mobile_endoendo/repositories/data/article.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -43,9 +43,9 @@ void main() {
       (WidgetTester tester) async {
     when(mockRepo.getNews())
         .thenAnswer((realInvocation) => Future.value(List.of({
-              const ArticleThumbnail('url', 'mock title 1', 'mock subtitle 1'),
-              const ArticleThumbnail('url2', 'mock title 2', 'mock subtitle 2')
-            })));
+          const Article('1', 'url', 'mock title 1', 'mock subtitle 1', 'text'),
+          const Article('2', 'url2', 'mock title 2', 'mock subtitle 2', 'text2')
+        })));
 
     await initDI();
 
