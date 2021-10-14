@@ -11,6 +11,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_widget.dart';
+import 'package:mobile_endoendo/features/guide/article_view_model.dart';
+import 'package:mobile_endoendo/features/guide/article_widget.dart';
 import 'package:mobile_endoendo/repositories/articles_repository.dart';
 import 'package:mobile_endoendo/repositories/data/article.dart';
 import 'package:mockito/annotations.dart';
@@ -22,20 +24,24 @@ import 'dashboard_widget_test.mocks.dart';
 void main() {
   final mockRepo = MockArticlesRepository();
 
-  const Widget dashboardWidget = MediaQuery(
+  Widget dashboardWidget = MediaQuery(
       data: MediaQueryData(),
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: DashboardWidget(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const DashboardWidget(),
+          ArticleWidget.routeName: (context) => const ArticleWidget(),
+        },
       ));
 
   Future<void> initDI() async {
     await GetIt.I.reset();
 
+    GetIt.I.registerSingleton<ArticleViewModel>(ArticleViewModel());
     GetIt.I.registerSingletonAsync<ArticlesRepository>(() async => mockRepo);
-    GetIt.I.registerSingletonWithDependencies<DashboardViewModel>(
-        () => DashboardViewModel(),
+    GetIt.I.registerSingletonWithDependencies<DashboardViewModel>(() => DashboardViewModel(),
         dependsOn: [ArticlesRepository]);
   }
 
@@ -43,8 +49,18 @@ void main() {
       (WidgetTester tester) async {
     when(mockRepo.getNews())
         .thenAnswer((realInvocation) => Future.value(List.of({
-          const Article('1', 'url', 'mock title 1', 'mock subtitle 1', 'text'),
-          const Article('2', 'url2', 'mock title 2', 'mock subtitle 2', 'text2')
+          const Article(
+              id: '1',
+              thumbUrl: 'url',
+              title: 'mock title 1',
+              lead: 'mock subtitle 1',
+              text: 'text'),
+          const Article(
+              id: '2',
+              thumbUrl: 'url2',
+              title: 'mock title 2',
+              lead: 'mock subtitle 2',
+              text: 'text'),
         })));
 
     await initDI();
@@ -75,5 +91,30 @@ void main() {
     expect(find.text('mock title 2'), findsNothing);
     expect(find.text('mock subtitle 1'), findsNothing);
     expect(find.text('mock subtitle 2'), findsNothing);
+  });
+
+  testWidgets('Should show news article when thumbnail tapped', (WidgetTester tester) async {
+    when(mockRepo.getNews()).thenAnswer((realInvocation) => Future.value(List.of({
+          const Article(
+              id: '1',
+              thumbUrl: 'url',
+              title: 'mock title 1',
+              lead: 'mock subtitle 1',
+              text: 'text'),
+          const Article(
+              id: '2',
+              thumbUrl: 'url2',
+              title: 'mock title 2',
+              lead: 'mock subtitle 2',
+              text: 'text'),
+        })));
+
+    await initDI();
+    await tester.pumpWidget(dashboardWidget);
+    await tester.pump();
+    await tester.tap(find.text('mock title 1'));
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    expect(find.byType(ArticleWidget), findsOneWidget);
   });
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobile_endoendo/core/values.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
+import 'package:mobile_endoendo/features/guide/article_widget.dart';
 
 class ArticleThumbnailWidget extends StatelessWidget {
   final ArticleUiModel _uiModel;
@@ -9,7 +10,11 @@ class ArticleThumbnailWidget extends StatelessWidget {
   const ArticleThumbnailWidget(this._uiModel, {Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Card(
+  Widget build(BuildContext context) => GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, ArticleWidget.routeName);
+      },
+      child: Card(
         child: Row(
           children: [
             const Image(
@@ -32,8 +37,12 @@ class ArticleThumbnailWidget extends StatelessWidget {
                     )),
                 Padding(
                     padding: const EdgeInsets.fromLTRB(marginMedium, 0, marginSmall, marginSmall),
-                    child: Text(_uiModel.subtitle,
-                        style: Theme.of(context).textTheme.bodyText2, maxLines: 2))
+                    child: Text(
+                      _uiModel.subtitle,
+                      style: Theme.of(context).textTheme.bodyText2,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ))
               ],
             )),
             const Icon(Icons.navigate_next),
@@ -45,5 +54,5 @@ class ArticleThumbnailWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(outlineRadius)),
         clipBehavior: Clip.hardEdge,
         elevation: 0,
-      );
+      ));
 }

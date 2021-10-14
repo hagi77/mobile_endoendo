@@ -22,9 +22,11 @@ class ArticleUiModel {
   final String title;
   final String subtitle;
   final String thumbUrl;
+  final String text;
 
   ArticleUiModel.from(Article data)
       : title = data.title,
         subtitle = data.lead,
-        thumbUrl = data.thumbUrl;
+        thumbUrl = data.thumbUrl,
+        text = data.text;
 }

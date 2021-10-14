@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
+import 'package:mobile_endoendo/features/guide/article_view_model.dart';
+import 'package:mobile_endoendo/features/guide/article_widget.dart';
 import 'package:mobile_endoendo/repositories/articles_repository.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
 import 'package:mobile_endoendo/widgets/progress_widget.dart';
@@ -22,6 +24,8 @@ Future<void> setupDI() {
 
   GetIt.I.registerSingletonWithDependencies<DashboardViewModel>(() => DashboardViewModel(),
       dependsOn: [ArticlesRepository]);
+
+  GetIt.I.registerSingleton<ArticleViewModel>(ArticleViewModel());
 
   return GetIt.I.allReady();
 }
@@ -51,19 +55,23 @@ class _MyAppState extends State<MyApp> {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: FutureBuilder(
-          future: diSetup,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return const ExceptionWidget();
-            }
+      initialRoute: '/',
+      routes: {
+        '/': (context) => FutureBuilder(
+            future: diSetup,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const ExceptionWidget();
+              }
 
-            if (snapshot.connectionState == ConnectionState.done) {
-              return const DashboardWidget();
-            }
+              if (snapshot.connectionState == ConnectionState.done) {
+                return const DashboardWidget();
+              }
 
-            return const ProgressWidget();
-          }),
+              return const ProgressWidget();
+            }),
+        ArticleWidget.routeName: (context) => const ArticleWidget(),
+      },
     );
   }
 }
