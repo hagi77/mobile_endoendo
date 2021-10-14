@@ -11,16 +11,21 @@ import 'core/theme.dart';
 import 'features/dashboard/dashboard_widget.dart';
 
 void main() {
-  setupDI();
   runApp(const MyApp());
 }
 
-void setupDI() {
-  GetIt.I.registerSingletonAsync<ArticlesRepository>(
-      () async => ArticlesRepoMock());
+Future<void> setupDI() {
+  GetIt.I.registerSingletonAsync<FirebaseApp>(() => Firebase.initializeApp());
+
+  GetIt.I.registerSingletonWithDependencies<ArticlesRepository>(
+      () => ArticlesRepositoryImpl(),
+      dependsOn: [FirebaseApp]);
+
   GetIt.I.registerSingletonWithDependencies<DashboardViewModel>(
       () => DashboardViewModel(),
       dependsOn: [ArticlesRepository]);
+
+  return GetIt.I.allReady();
 }
 
 class MyApp extends StatefulWidget {
@@ -31,8 +36,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -50,7 +53,7 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: FutureBuilder(
-          future: _initialization,
+          future: setupDI(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const ExceptionWidget();
