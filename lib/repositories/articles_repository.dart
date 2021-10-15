@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +11,6 @@ abstract class ArticlesRepository {
 }
 
 class ArticlesRepositoryImpl implements ArticlesRepository {
-
   final _newsThumbsApi = FirebaseFirestore.instance.collection('news').withConverter<Article>(
       fromFirestore: (snapshot, _) => Article.fromJSON(snapshot.id, snapshot.data()!),
       toFirestore: (article, _) => article.toJson());
@@ -38,7 +38,9 @@ class ArticlesRepositoryImpl implements ArticlesRepository {
     for (var item in map.entries) {
       var result = await item.value;
       var article = item.key;
-      article.text = result.toString();
+      if (result != null) {
+        article.text = utf8.decode(result.toList(), allowMalformed: true);
+      }
       yield article;
     }
   }
