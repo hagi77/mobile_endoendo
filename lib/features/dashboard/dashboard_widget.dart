@@ -41,7 +41,7 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
               );
             }
             if (snapshot.hasError) {
-              return const ExceptionWidget();
+              return ExceptionWidget();
             }
             return const ProgressWidget();
           }),

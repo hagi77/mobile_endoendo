@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "483126828640-5r492h6hlr7kni5o5r56gn8b1gabov92.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eu.hagisoft.mobile_endoendo",
+            "certificate_hash": "a2d173e97d02774e85e5a4e9744ae603cd5e84f5"
+          }
+        },
+        {
           "client_id": "483126828640-qilvrau9otijihu92obrpit8mrre9ebi.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "483126828640-qilvrau9otijihu92obrpit8mrre9ebi.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "483126828640-ev2mam2li6oamrdrei3g4uav5s5tcjd0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "eu.hagisoft.mobileEndoendo"
+              }
             }
           ]
         }
