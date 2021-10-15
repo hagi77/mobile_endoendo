@@ -50,13 +50,13 @@ void main() {
     when(mockRepo.getNews()).thenAnswer((realInvocation) => Future.value(List.of({
           Article(
               id: '1',
-              thumbUrl: 'url',
+              imageFile: 'url',
               title: 'mock title 1',
               lead: 'mock subtitle 1',
               textFile: 'text'),
           Article(
               id: '2',
-              thumbUrl: 'url2',
+              imageFile: 'url2',
               title: 'mock title 2',
               lead: 'mock subtitle 2',
               textFile: 'text'),
@@ -94,13 +94,13 @@ void main() {
     when(mockRepo.getNews()).thenAnswer((realInvocation) => Future.value(List.of({
           Article(
               id: '1',
-              thumbUrl: 'url',
+              imageFile: 'url',
               title: 'mock title 1',
               lead: 'mock subtitle 1',
               textFile: 'text'),
           Article(
               id: '2',
-              thumbUrl: 'url2',
+              imageFile: 'url2',
               title: 'mock title 2',
               lead: 'mock subtitle 2',
               textFile: 'text'),

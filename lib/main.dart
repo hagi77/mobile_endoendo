@@ -8,6 +8,8 @@ import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/features/guide/article_view_model.dart';
 import 'package:mobile_endoendo/features/guide/article_widget.dart';
 import 'package:mobile_endoendo/repositories/articles_repository.dart';
+import 'package:mobile_endoendo/repositories/images_repository.dart';
+import 'package:mobile_endoendo/widgets/article_thumb_view_model.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
 import 'package:mobile_endoendo/widgets/progress_widget.dart';
 
@@ -24,11 +26,13 @@ Future<void> setupDI() {
 
   GetIt.I.registerSingletonWithDependencies<ArticlesRepository>(() => ArticlesRepositoryImpl(),
       dependsOn: [FirebaseApp]);
+  GetIt.I.registerSingletonWithDependencies<ImagesRepository>(() => ImagesRepositoryImpl(),
+      dependsOn: [FirebaseApp]);
 
   GetIt.I.registerSingletonWithDependencies<DashboardViewModel>(() => DashboardViewModel(),
       dependsOn: [ArticlesRepository]);
-
-  GetIt.I.registerSingleton<ArticleViewModel>(ArticleViewModel());
+  GetIt.I.registerFactory<ArticleThumbViewModel>(() => ArticleThumbViewModel());
+  GetIt.I.registerFactory<ArticleViewModel>(() => ArticleViewModel());
   GetIt.I.registerSingleton<LoginViewModel>(LoginViewModel());
 
   return GetIt.I.allReady();

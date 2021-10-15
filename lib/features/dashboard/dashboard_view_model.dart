@@ -21,12 +21,12 @@ class DashboardViewModel extends BaseViewModel {
 class ArticleUiModel {
   final String title;
   final String subtitle;
-  final String thumbUrl;
+  final String leadImageFile;
   final String text;
 
   ArticleUiModel.from(Article data)
       : title = data.title,
         subtitle = data.lead,
-        thumbUrl = data.thumbUrl,
+        leadImageFile = data.imageFile,
         text = data.text ?? "";
 }
