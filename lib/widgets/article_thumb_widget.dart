@@ -43,11 +43,11 @@ class _ArticleThumbnailWidgetState
                       height: 76,
                     );
                   } else {
-                    return const Image(
-                      image: AssetImage('lib/images/placeholder.jpg'),
-                      fit: BoxFit.fitHeight,
+                    return Container(
                       width: 76,
                       height: 76,
+                      alignment: Alignment.center,
+                      child: const CircularProgressIndicator.adaptive(),
                     );
                   }
                 }),
@@ -63,24 +63,24 @@ class _ArticleThumbnailWidgetState
                       style: Theme.of(context).textTheme.headline3,
                       maxLines: 1,
                     )),
-                        Padding(
-                            padding: const EdgeInsets.fromLTRB(marginMedium, 0, marginSmall, marginSmall),
-                            child: Text(
-                              viewModel.subtitle,
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(marginMedium, 0, marginSmall, marginSmall),
+                    child: Text(
+                      viewModel.subtitle,
                       style: Theme.of(context).textTheme.bodyText2,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ))
-                      ],
-                    )),
-                const Icon(Icons.navigate_next),
               ],
-            ),
-            shape: RoundedRectangleBorder(
-                side: const BorderSide(
-                    color: Colors.black, width: outlineThickness, style: BorderStyle.solid),
-                borderRadius: BorderRadius.circular(outlineRadius)),
-            clipBehavior: Clip.hardEdge,
-            elevation: 0,
-          ));
+            )),
+            const Icon(Icons.navigate_next),
+          ],
+        ),
+        shape: RoundedRectangleBorder(
+            side: const BorderSide(
+                color: Colors.black, width: outlineThickness, style: BorderStyle.solid),
+            borderRadius: BorderRadius.circular(outlineRadius)),
+        clipBehavior: Clip.hardEdge,
+        elevation: 0,
+      ));
 }
