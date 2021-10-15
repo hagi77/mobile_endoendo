@@ -28,5 +28,5 @@ class ArticleUiModel {
       : title = data.title,
         subtitle = data.lead,
         thumbUrl = data.thumbUrl,
-        text = data.text;
+        text = data.text ?? "";
 }

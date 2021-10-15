@@ -47,20 +47,19 @@ void main() {
 
   testWidgets('Should show news section when news articles are available',
       (WidgetTester tester) async {
-    when(mockRepo.getNews())
-        .thenAnswer((realInvocation) => Future.value(List.of({
-          const Article(
+    when(mockRepo.getNews()).thenAnswer((realInvocation) => Future.value(List.of({
+          Article(
               id: '1',
               thumbUrl: 'url',
               title: 'mock title 1',
               lead: 'mock subtitle 1',
-              text: 'text'),
-          const Article(
+              textFile: 'text'),
+          Article(
               id: '2',
               thumbUrl: 'url2',
               title: 'mock title 2',
               lead: 'mock subtitle 2',
-              text: 'text'),
+              textFile: 'text'),
         })));
 
     await initDI();
@@ -75,11 +74,9 @@ void main() {
     expect(find.text('mock subtitle 2'), findsOneWidget);
   });
 
-  testWidgets(
-      'Should not show news section when no news articles are available',
+  testWidgets('Should not show news section when no news articles are available',
       (WidgetTester tester) async {
-    when(mockRepo.getNews())
-        .thenAnswer((realInvocation) => Future.value(List.empty()));
+    when(mockRepo.getNews()).thenAnswer((realInvocation) => Future.value(List.empty()));
 
     await initDI();
 
@@ -95,18 +92,18 @@ void main() {
 
   testWidgets('Should show news article when thumbnail tapped', (WidgetTester tester) async {
     when(mockRepo.getNews()).thenAnswer((realInvocation) => Future.value(List.of({
-          const Article(
+          Article(
               id: '1',
               thumbUrl: 'url',
               title: 'mock title 1',
               lead: 'mock subtitle 1',
-              text: 'text'),
-          const Article(
+              textFile: 'text'),
+          Article(
               id: '2',
               thumbUrl: 'url2',
               title: 'mock title 2',
               lead: 'mock subtitle 2',
-              text: 'text'),
+              textFile: 'text'),
         })));
 
     await initDI();

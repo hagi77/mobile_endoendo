@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import 'data/article.dart';
 
@@ -6,27 +9,37 @@ abstract class ArticlesRepository {
   Future<List<Article>> getNews();
 }
 
-class ArticlesRepoMock implements ArticlesRepository {
-  @override
-  Future<List<Article>> getNews() async {
-    await Future.delayed(const Duration(seconds: 2));
-    return List.of({
-      const Article(id: '1', thumbUrl: 'url', title: 'title', lead: 'subtitle', text: 'text'),
-      const Article(id: '2', thumbUrl: 'url2', title: 'title2', lead: 'subtitle2', text: 'text2'),
-    });
-  }
-}
-
 class ArticlesRepositoryImpl implements ArticlesRepository {
-  final _articlesApi = FirebaseFirestore.instance.collection('articles');
 
-  final _newsApi = FirebaseFirestore.instance.collection('news').withConverter<Article>(
+  final _newsThumbsApi = FirebaseFirestore.instance.collection('news').withConverter<Article>(
       fromFirestore: (snapshot, _) => Article.fromJSON(snapshot.id, snapshot.data()!),
       toFirestore: (article, _) => article.toJson());
 
+  final _filesApi = firebase_storage.FirebaseStorage.instance;
+  late final _newsFilesRef = _filesApi.ref().child('news');
+
   @override
   Future<List<Article>> getNews() async {
-    final news = await _newsApi.get();
-    return news.docs.map((doc) => doc.data()).toList();
+    final articles = (await _newsThumbsApi.get()).docs.map((doc) => doc.data());
+
+    Map<Article, Future<Uint8List?>> futures = {};
+
+    for (var article in articles) {
+      futures.putIfAbsent(article, () => _getNewsArticle(article.textFile));
+    }
+
+    return _getStream(futures).toList();
+  }
+
+  Future<Uint8List?> _getNewsArticle(String filename) async =>
+      _newsFilesRef.child(filename).getData();
+
+  Stream<Article> _getStream(Map<Article, Future<Uint8List?>> map) async* {
+    for (var item in map.entries) {
+      var result = await item.value;
+      var article = item.key;
+      article.text = result.toString();
+      yield article;
+    }
   }
 }

@@ -12,7 +12,7 @@ class ArticleThumbnailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, ArticleWidget.routeName);
+        Navigator.pushNamed(context, ArticleWidget.routeName, arguments: _uiModel);
       },
       child: Card(
         child: Row(
