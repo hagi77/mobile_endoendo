@@ -53,7 +53,7 @@ class _ArticleThumbnailWidgetState extends BaseWidgetState<ArticleThumbnailWidge
                     return Container(
                       width: 76,
                       height: 76,
-                      padding: const EdgeInsets.all(marginSmall);
+                      padding: const EdgeInsets.all(marginSmall),
                       alignment: Alignment.center,
                       child: const CircularProgressIndicator.adaptive(),
                     );
