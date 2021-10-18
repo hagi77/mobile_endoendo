@@ -1,7 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 abstract class ImagesRepository {
-  Future<String> getImageUrl(String filename);
+  Future<Uint8List?> getImage(String filename);
 }
 
 class ImagesRepositoryImpl implements ImagesRepository {
@@ -9,6 +11,5 @@ class ImagesRepositoryImpl implements ImagesRepository {
   late final _imageFilesRef = _filesApi.ref().child('images');
 
   @override
-  Future<String> getImageUrl(String filename) async =>
-      _imageFilesRef.child(filename).getDownloadURL();
+  Future<Uint8List?> getImage(String filename) async => _imageFilesRef.child(filename).getData();
 }

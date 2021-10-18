@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:get_it/get_it.dart';
 import 'package:mobile_endoendo/core/base_view_model.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
@@ -17,4 +19,6 @@ class ArticleThumbViewModel extends BaseViewModel {
   }
 
   Future<String> getImageUrl() => _imagesRepo.getImageUrl(_uiModel.leadImageFile);
+
+  Future<Uint8List?> getImage() => _imagesRepo.getImage(_uiModel.leadImageFile);
 }
