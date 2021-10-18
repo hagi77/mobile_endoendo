@@ -5,3 +5,5 @@ const marginTiny = 4.0;
 
 const outlineThickness = 1.0;
 const outlineRadius = 5.0;
+
+const shortAnim = 300;

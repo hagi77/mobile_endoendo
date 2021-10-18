@@ -8,4 +8,8 @@ abstract class BaseViewModel {
   void removeListener() {
     callback = null;
   }
+
+  void updateView() {
+    callback?.call();
+  }
 }
