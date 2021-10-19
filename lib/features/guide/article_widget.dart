@@ -36,9 +36,7 @@ class _ArticleWidgetState extends BaseWidgetState<ArticleWidget, ArticleViewMode
         fit: BoxFit.cover,
       );
     }
-
-    var markdownStyleSheet =
-        MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(blockSpacing: marginMedium);
+    ;
 
     return Scaffold(
         body: SafeArea(
@@ -66,7 +64,7 @@ class _ArticleWidgetState extends BaseWidgetState<ArticleWidget, ArticleViewMode
         body: Markdown(
           padding: const EdgeInsets.all(marginRegular),
           data: viewModel.text,
-          styleSheet: markdownStyleSheet,
+          styleSheet: getMarkdownStyleSheet(context),
           onTapLink: (text, href, title) {
             if (href != null) {
               viewModel.urlTapped(href);
