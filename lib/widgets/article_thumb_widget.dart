@@ -30,74 +30,75 @@ class _ArticleThumbnailWidgetState
   }
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, ArticleWidget.routeName, arguments: widget._uiModel);
-      },
-      child: Card(
-        child: Row(
-          children: [
-            FutureBuilder(
-                future: viewModel.getImage(),
-                builder: (context, snapshot) {
-                  if (snapshot.loaded) {
-                    return AnimatedSwitcher(
-                      child: Image(
-                        image: MemoryImage(snapshot.data as Uint8List),
-                        fit: BoxFit.fitHeight,
-                        width: 76,
-                        height: 76,
-                      ),
-                      duration: const Duration(milliseconds: shortAnim),
-                    );
-                  } else if (snapshot.hasError) {
-                    return AnimatedSwitcher(
-                        child: ExceptionWidget(
-                            message: AppLocalizations.of(context)?.generalException),
-                        duration: const Duration(milliseconds: shortAnim));
-                  } else {
-                    return AnimatedSwitcher(
-                      child: Container(
-                        width: 76,
-                        height: 76,
-                        padding: const EdgeInsets.all(marginSmall),
-                        alignment: Alignment.center,
-                        child: const CircularProgressIndicator.adaptive(),
-                      ),
-                      duration: const Duration(milliseconds: shortAnim),
-                    );
-                  }
-                }),
-            Expanded(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+  Widget build(BuildContext context) => Card(
+        child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, ArticleWidget.routeName, arguments: widget._uiModel);
+            },
+            child: Row(
               children: [
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                        marginMedium, marginSmall, marginSmall, marginSmall),
-                    child: Text(
-                      viewModel.title,
-                      style: Theme.of(context).textTheme.headline3,
-                      maxLines: 1,
-                    )),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(marginMedium, 0, marginSmall, marginSmall),
-                    child: Text(
-                      viewModel.subtitle,
-                      style: Theme.of(context).textTheme.bodyText2,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ))
+                FutureBuilder(
+                    future: viewModel.getImage(),
+                    builder: (context, snapshot) {
+                      if (snapshot.loaded) {
+                        return AnimatedSwitcher(
+                          child: Image(
+                            image: MemoryImage(snapshot.data as Uint8List),
+                            fit: BoxFit.fitHeight,
+                            width: 76,
+                            height: 76,
+                          ),
+                          duration: const Duration(milliseconds: shortAnim),
+                        );
+                      } else if (snapshot.hasError) {
+                        return AnimatedSwitcher(
+                            child: ExceptionWidget(
+                                message: AppLocalizations.of(context)?.generalException),
+                            duration: const Duration(milliseconds: shortAnim));
+                      } else {
+                        return AnimatedSwitcher(
+                          child: Container(
+                            width: 76,
+                            height: 76,
+                            padding: const EdgeInsets.all(marginSmall),
+                            alignment: Alignment.center,
+                            child: const CircularProgressIndicator.adaptive(),
+                          ),
+                          duration: const Duration(milliseconds: shortAnim),
+                        );
+                      }
+                    }),
+                Expanded(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                            marginMedium, marginSmall, marginSmall, marginSmall),
+                        child: Text(
+                          viewModel.title,
+                          style: Theme.of(context).textTheme.headline3,
+                          maxLines: 1,
+                        )),
+                    Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(marginMedium, 0, marginSmall, marginSmall),
+                        child: Text(
+                          viewModel.subtitle,
+                          style: Theme.of(context).textTheme.bodyText2,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ))
+                  ],
+                )),
+                const Icon(Icons.navigate_next),
               ],
             )),
-            const Icon(Icons.navigate_next),
-          ],
-        ),
         shape: RoundedRectangleBorder(
             side: const BorderSide(
                 color: Colors.black, width: outlineThickness, style: BorderStyle.solid),
             borderRadius: BorderRadius.circular(outlineRadius)),
         clipBehavior: Clip.hardEdge,
         elevation: 0,
-      ));
+      );
 }
