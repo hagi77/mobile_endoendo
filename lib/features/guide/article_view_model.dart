@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:mobile_endoendo/core/base_view_model.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArticleViewModel extends BaseViewModel {
   late ArticleUiModel _uiModel;
@@ -12,5 +13,17 @@ class ArticleViewModel extends BaseViewModel {
 
   void setArticle(ArticleUiModel args) {
     _uiModel = args;
+  }
+
+  Future<void> urlTapped(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

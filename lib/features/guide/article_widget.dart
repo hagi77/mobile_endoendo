@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:mobile_endoendo/core/base_widget_state.dart';
 import 'package:mobile_endoendo/core/theme.dart';
+import 'package:mobile_endoendo/core/values.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 
 import 'article_view_model.dart';
@@ -36,13 +37,17 @@ class _ArticleWidgetState extends BaseWidgetState<ArticleWidget, ArticleViewMode
       );
     }
 
+    var markdownStyleSheet =
+        MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(blockSpacing: marginMedium);
+
     return Scaffold(
-      body: NestedScrollView(
+        body: SafeArea(
+      child: NestedScrollView(
         headerSliverBuilder: (context, scrolled) => [
           SliverAppBar(
             backgroundColor: toolbarBgkColor,
             foregroundColor: Colors.black,
-            expandedHeight: 180.0,
+            expandedHeight: 200.0,
             floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
@@ -59,10 +64,16 @@ class _ArticleWidgetState extends BaseWidgetState<ArticleWidget, ArticleViewMode
           )
         ],
         body: Markdown(
+          padding: const EdgeInsets.all(marginRegular),
           data: viewModel.text,
-          styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)),
+          styleSheet: markdownStyleSheet,
+          onTapLink: (text, href, title) {
+            if (href != null) {
+              viewModel.urlTapped(href);
+            }
+          },
         ),
       ),
-    );
+    ));
   }
 }
