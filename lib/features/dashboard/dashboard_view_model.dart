@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:get_it/get_it.dart';
 import 'package:mobile_endoendo/core/base_view_model.dart';
 import 'package:mobile_endoendo/repositories/articles_repository.dart';
@@ -22,6 +24,7 @@ class ArticleUiModel {
   final String title;
   final String subtitle;
   final String leadImageFile;
+  Uint8List? leadImage;
   final String text;
 
   ArticleUiModel.from(Article data)

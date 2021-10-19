@@ -18,5 +18,6 @@ class ArticleThumbViewModel extends BaseViewModel {
     _uiModel = uiModel;
   }
 
-  Future<Uint8List?> getImage() => _imagesRepo.getImage(_uiModel.leadImageFile);
+  Future<Uint8List?> getImage() =>
+      _imagesRepo.getImage(_uiModel.leadImageFile).then((value) => _uiModel.leadImage = value);
 }
