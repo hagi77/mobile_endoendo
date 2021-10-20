@@ -25,7 +25,7 @@ void main() {
   final mockRepo = MockArticlesRepository();
 
   Widget dashboardWidget = MediaQuery(
-      data: MediaQueryData(),
+      data: const MediaQueryData(),
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

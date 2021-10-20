@@ -67,23 +67,24 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: '/',
       routes: {
-        '/': (context) => FutureBuilder(
-            future: diSetup,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return ExceptionWidget();
-              }
+        '/': (context) => Scaffold(
+            body: FutureBuilder(
+                future: diSetup,
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return ExceptionWidget();
+                  }
 
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (userSignedId) {
-                  return const DashboardWidget();
-                } else {
-                  return const LoginWidget();
-                }
-              }
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (userSignedId) {
+                      return const DashboardWidget();
+                    } else {
+                      return const LoginWidget();
+                    }
+                  }
 
-              return const ProgressWidget();
-            }),
+                  return const ProgressWidget();
+                })),
         ArticleWidget.routeName: (context) => const ArticleWidget(),
       },
     );

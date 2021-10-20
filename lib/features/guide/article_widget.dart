@@ -36,7 +36,6 @@ class _ArticleWidgetState extends BaseWidgetState<ArticleWidget, ArticleViewMode
         fit: BoxFit.cover,
       );
     }
-    ;
 
     return Scaffold(
         body: SafeArea(
