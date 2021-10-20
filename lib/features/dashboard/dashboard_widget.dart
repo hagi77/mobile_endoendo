@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mobile_endoendo/core/base_widget_state.dart';
 import 'package:mobile_endoendo/core/extension_functions.dart';
@@ -30,38 +31,34 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
               ))
         ],
       ),
-      body: FutureBuilder(
-          future: viewModel.getNews(),
-          builder: (BuildContext context, AsyncSnapshot<List<ArticleUiModel>> snapshot) {
-            if (snapshot.loaded) {
-              return Container(
-                padding: const EdgeInsets.fromLTRB(marginRegular, 0, marginRegular, marginRegular),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: getNewsSection(snapshot.requireData)),
-              );
-            }
-            if (snapshot.hasError) {
-              return ExceptionWidget();
-            }
-            return const ProgressWidget();
-          }),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.home), label: AppLocalizations.of(context)?.appBarHome),
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.menu_book_outlined),
-              label: AppLocalizations.of(context)?.appBarGuide),
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.favorite),
-              label: AppLocalizations.of(context)?.appBarFavorites),
-        ],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.only(left: marginRegular, right: marginRegular),
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [_getNewsSection(), ..._getGuideSection()]))),
+      bottomNavigationBar: _getBottomNavBar(context),
     );
   }
 
-  List<Widget> getNewsSection(List<ArticleUiModel> articles) {
+  FutureBuilder<List<ArticleUiModel>> _getNewsSection() {
+    return FutureBuilder(
+        future: viewModel.getNews(),
+        builder: (BuildContext context, AsyncSnapshot<List<ArticleUiModel>> snapshot) {
+          if (snapshot.loaded) {
+            return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: _getNewsItems(snapshot.requireData));
+          }
+          if (snapshot.hasError) {
+            return ExceptionWidget();
+          }
+          return const ProgressWidget();
+        });
+  }
+
+  List<Widget> _getNewsItems(List<ArticleUiModel> articles) {
     var articleWidgets = articles.map((item) => ArticleThumbnailWidget(item));
     return <Widget>[
       Container(
@@ -72,5 +69,50 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
           )),
       ...articleWidgets
     ];
+  }
+
+  List<Widget> _getGuideSection() {
+    var empty = const SizedBox(
+      width: marginMedium,
+      height: marginMedium,
+    );
+    return [
+      Container(
+          margin: const EdgeInsets.only(top: marginLarge, bottom: marginMedium),
+          child: Text(
+            AppLocalizations.of(context)?.dashboardGuideTitle ?? "",
+            style: Theme.of(context).textTheme.headline1,
+          )),
+      Table(
+        columnWidths: const {1: FixedColumnWidth(marginMedium)},
+        children: [
+          TableRow(children: [_getGuideTile(), empty, _getGuideTile()]),
+          TableRow(children: [empty, empty, empty]),
+          TableRow(children: [_getGuideTile(), empty, _getGuideTile()])
+        ],
+      )
+    ];
+  }
+
+  Widget _getGuideTile() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(outlineRadius),
+      child: Image.asset('lib/images/placeholder.jpg'),
+      clipBehavior: Clip.hardEdge,
+    );
+  }
+
+  BottomNavigationBar _getBottomNavBar(BuildContext context) {
+    return BottomNavigationBar(
+      items: [
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.home), label: AppLocalizations.of(context)?.appBarHome),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.menu_book_outlined),
+            label: AppLocalizations.of(context)?.appBarGuide),
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.favorite), label: AppLocalizations.of(context)?.appBarFavorites),
+      ],
+    );
   }
 }
