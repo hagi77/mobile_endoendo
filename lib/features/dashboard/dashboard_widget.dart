@@ -38,7 +38,7 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
               child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [_getNewsSection(), ..._getGuideSection()]))),
+                  children: [_getNewsSection(), ..._getGuideSection(context)]))),
       bottomNavigationBar: _getBottomNavBar(context),
     );
   }
@@ -63,7 +63,7 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
     var articleWidgets = articles.map((item) => ArticleThumbnailWidget(item));
     return <Widget>[
       Container(
-          margin: const EdgeInsets.only(bottom: marginMedium),
+          margin: const EdgeInsets.only(bottom: marginMedium, left: superTiny),
           child: Text(
             AppLocalizations.of(context)?.dashboardNewsTitle ?? "",
             style: Theme.of(context).textTheme.headline1,
@@ -72,26 +72,58 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
     ];
   }
 
-  List<Widget> _getGuideSection() {
-    var empty = const SizedBox(
-      width: marginMedium,
-      height: marginMedium,
+  List<Widget> _getGuideSection(BuildContext context) {
+    const empty = SizedBox(
+      width: marginSmall,
+      height: marginSmall,
     );
+
+    void addVerticalSeparators(List<Widget> list) {
+      int i = 1;
+      while (i < list.length) {
+        list.insert(i, empty);
+        i += 2;
+      }
+    }
+
+    final guideTopics =
+        viewModel.getGuideTopics(context).map((title) => _getGuideTile(title)).toList();
+    const itemsPerRow = 3;
+    final rowsCount = (guideTopics.length / itemsPerRow).ceil();
+
+    List<TableRow> rows = [];
+    int index = 0;
+    List<Widget> childrenPerRow;
+    Widget cell;
+
+    for (int row = 1; row <= rowsCount; row++) {
+      childrenPerRow = [];
+      while (index < row * itemsPerRow) {
+        if (index < guideTopics.length) {
+          cell = guideTopics[index];
+        } else {
+          cell = empty;
+        }
+        childrenPerRow.add(cell);
+        index++;
+      }
+
+      addVerticalSeparators(childrenPerRow);
+
+      rows.add(TableRow(children: childrenPerRow));
+      rows.add(TableRow(children: List.filled(childrenPerRow.length, empty)));
+    }
+
     return [
       Container(
-          margin: const EdgeInsets.only(top: marginLarge, bottom: marginMedium),
+          margin: const EdgeInsets.only(top: marginLarge, bottom: marginMedium, left: superTiny),
           child: Text(
             AppLocalizations.of(context)?.dashboardGuideTitle ?? "",
             style: Theme.of(context).textTheme.headline1,
           )),
       Table(
-        columnWidths: const {1: FixedColumnWidth(marginMedium)},
-        children: [
-          TableRow(children: [_getGuideTile('one'), empty, _getGuideTile('two')]),
-          TableRow(children: [empty, empty, empty]),
-          TableRow(children: [_getGuideTile('three'), empty, _getGuideTile('four')])
-        ],
-      )
+          columnWidths: const {1: FixedColumnWidth(marginSmall), 3: FixedColumnWidth(marginSmall)},
+          children: [...rows]),
     ];
   }
 
@@ -101,11 +133,10 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
         Image.asset('lib/images/placeholder.jpg'),
         Padding(
             padding: const EdgeInsets.all(marginSmall),
-            child: Text(
-              title,
-              style: Theme.of(context).textTheme.bodyText1,
-              maxLines: 1,
-            ))
+            child: Text(title,
+                style: Theme.of(context).textTheme.bodyText1,
+                maxLines: 2,
+                textAlign: TextAlign.center))
       ]),
     );
   }
