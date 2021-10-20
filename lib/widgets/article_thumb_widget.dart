@@ -11,6 +11,7 @@ import 'package:mobile_endoendo/features/guide/article_widget.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
 
 import 'article_thumb_view_model.dart';
+import 'outlined_card.dart';
 
 class ArticleThumbnailWidget extends StatefulWidget {
   final ArticleUiModel _uiModel;
@@ -30,7 +31,7 @@ class _ArticleThumbnailWidgetState
   }
 
   @override
-  Widget build(BuildContext context) => Card(
+  Widget build(BuildContext context) => OutlinedCard(
         child: InkWell(
             onTap: () {
               Navigator.pushNamed(context, ArticleWidget.routeName, arguments: widget._uiModel);
@@ -94,11 +95,5 @@ class _ArticleThumbnailWidgetState
                 const Icon(Icons.navigate_next),
               ],
             )),
-        shape: RoundedRectangleBorder(
-            side: const BorderSide(
-                color: Colors.black, width: outlineThickness, style: BorderStyle.solid),
-            borderRadius: BorderRadius.circular(outlineRadius)),
-        clipBehavior: Clip.hardEdge,
-        elevation: 0,
       );
 }

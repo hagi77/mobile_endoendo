@@ -8,6 +8,7 @@ import 'package:mobile_endoendo/core/values.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/widgets/article_thumb_widget.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
+import 'package:mobile_endoendo/widgets/outlined_card.dart';
 import 'package:mobile_endoendo/widgets/progress_widget.dart';
 
 class DashboardWidget extends StatefulWidget {
@@ -86,19 +87,26 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
       Table(
         columnWidths: const {1: FixedColumnWidth(marginMedium)},
         children: [
-          TableRow(children: [_getGuideTile(), empty, _getGuideTile()]),
+          TableRow(children: [_getGuideTile('one'), empty, _getGuideTile('two')]),
           TableRow(children: [empty, empty, empty]),
-          TableRow(children: [_getGuideTile(), empty, _getGuideTile()])
+          TableRow(children: [_getGuideTile('three'), empty, _getGuideTile('four')])
         ],
       )
     ];
   }
 
-  Widget _getGuideTile() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(outlineRadius),
-      child: Image.asset('lib/images/placeholder.jpg'),
-      clipBehavior: Clip.hardEdge,
+  Widget _getGuideTile(String title) {
+    return OutlinedCard(
+      child: Column(children: [
+        Image.asset('lib/images/placeholder.jpg'),
+        Padding(
+            padding: const EdgeInsets.all(marginSmall),
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.bodyText1,
+              maxLines: 1,
+            ))
+      ]),
     );
   }
 
