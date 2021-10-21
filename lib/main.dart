@@ -7,6 +7,7 @@ import 'package:mobile_endoendo/features/authenticate/login_view_model.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/features/guide/article_view_model.dart';
 import 'package:mobile_endoendo/features/guide/article_widget.dart';
+import 'package:mobile_endoendo/features/guide/articles_list_view_model.dart';
 import 'package:mobile_endoendo/repositories/articles_repository.dart';
 import 'package:mobile_endoendo/repositories/images_repository.dart';
 import 'package:mobile_endoendo/widgets/article_thumb_view_model.dart';
@@ -16,6 +17,7 @@ import 'package:mobile_endoendo/widgets/progress_widget.dart';
 import 'core/theme.dart';
 import 'features/authenticate/login_widget.dart';
 import 'features/dashboard/dashboard_widget.dart';
+import 'features/guide/articles_list_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,6 +35,7 @@ Future<void> setupDI() {
       dependsOn: [ArticlesRepository]);
   GetIt.I.registerFactory<ArticleThumbViewModel>(() => ArticleThumbViewModel());
   GetIt.I.registerFactory<ArticleViewModel>(() => ArticleViewModel());
+  GetIt.I.registerFactory<ArticlesListViewModel>(() => ArticlesListViewModel());
   GetIt.I.registerSingleton<LoginViewModel>(LoginViewModel());
 
   return GetIt.I.allReady();
@@ -86,6 +89,7 @@ class _MyAppState extends State<MyApp> {
                   return const ProgressWidget();
                 })),
         ArticleWidget.routeName: (context) => const ArticleWidget(),
+        ArticlesListWidget.routeName: (context) => const ArticlesListWidget(),
       },
     );
   }

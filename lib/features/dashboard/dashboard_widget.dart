@@ -6,6 +6,7 @@ import 'package:mobile_endoendo/core/base_widget_state.dart';
 import 'package:mobile_endoendo/core/extension_functions.dart';
 import 'package:mobile_endoendo/core/values.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
+import 'package:mobile_endoendo/features/guide/articles_list_widget.dart';
 import 'package:mobile_endoendo/widgets/article_thumb_widget.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
 import 'package:mobile_endoendo/widgets/outlined_card.dart';
@@ -129,6 +130,8 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
 
   Widget _getGuideTile(String title) {
     return OutlinedCard(
+        child: InkWell(
+      onTap: () => Navigator.pushNamed(context, ArticlesListWidget.routeName),
       child: Column(children: [
         Image.asset('lib/images/placeholder.jpg'),
         Padding(
@@ -138,7 +141,7 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
                 maxLines: 2,
                 textAlign: TextAlign.center))
       ]),
-    );
+    ));
   }
 
   BottomNavigationBar _getBottomNavBar(BuildContext context) {

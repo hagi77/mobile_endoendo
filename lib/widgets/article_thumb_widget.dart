@@ -33,9 +33,8 @@ class _ArticleThumbnailWidgetState
   @override
   Widget build(BuildContext context) => OutlinedCard(
         child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, ArticleWidget.routeName, arguments: widget._uiModel);
-            },
+            onTap: () =>
+                Navigator.pushNamed(context, ArticleWidget.routeName, arguments: widget._uiModel),
             child: Row(
               children: [
                 FutureBuilder(

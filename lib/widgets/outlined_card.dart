@@ -8,7 +8,7 @@ class OutlinedCard extends Card {
           child: child,
           shape: RoundedRectangleBorder(
               side: const BorderSide(
-                  color: Colors.black, width: outlineThickness, style: BorderStyle.solid),
+                  color: Colors.black45, width: outlineThickness, style: BorderStyle.solid),
               borderRadius: BorderRadius.circular(outlineRadius)),
           clipBehavior: Clip.hardEdge,
           elevation: 0,
