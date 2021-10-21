@@ -33,8 +33,9 @@ Future<void> setupDI() {
 
   GetIt.I.registerSingletonWithDependencies<DashboardViewModel>(() => DashboardViewModel(),
       dependsOn: [ArticlesRepository]);
+  GetIt.I.registerSingletonWithDependencies<ArticleViewModel>(() => ArticleViewModel(),
+      dependsOn: [ArticlesRepository]);
   GetIt.I.registerFactory<ArticleThumbViewModel>(() => ArticleThumbViewModel());
-  GetIt.I.registerFactory<ArticleViewModel>(() => ArticleViewModel());
   GetIt.I.registerFactory<ArticlesListViewModel>(() => ArticlesListViewModel());
   GetIt.I.registerSingleton<LoginViewModel>(LoginViewModel());
 

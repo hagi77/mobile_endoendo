@@ -75,8 +75,8 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
 
   List<Widget> _getGuideSection(BuildContext context) {
     const empty = SizedBox(
-      width: marginSmall,
-      height: marginSmall,
+      width: marginTiny,
+      height: marginTiny,
     );
 
     void addVerticalSeparators(List<Widget> list) {
@@ -123,7 +123,7 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
             style: Theme.of(context).textTheme.headline1,
           )),
       Table(
-          columnWidths: const {1: FixedColumnWidth(marginSmall), 3: FixedColumnWidth(marginSmall)},
+          columnWidths: const {1: FixedColumnWidth(marginTiny), 3: FixedColumnWidth(marginTiny)},
           children: [...rows]),
     ];
   }
