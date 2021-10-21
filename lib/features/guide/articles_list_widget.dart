@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mobile_endoendo/core/base_widget_state.dart';
 import 'package:mobile_endoendo/core/extension_functions.dart';
 import 'package:mobile_endoendo/core/values.dart';
-import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/features/guide/articles_list_view_model.dart';
+import 'package:mobile_endoendo/features/models/article_ui_model.dart';
+import 'package:mobile_endoendo/features/models/articles_category_model.dart';
 import 'package:mobile_endoendo/widgets/article_thumb_widget.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
 import 'package:mobile_endoendo/widgets/progress_widget.dart';
@@ -21,8 +22,20 @@ class ArticlesListWidget extends StatefulWidget {
 class _ArticlesListWidgetState extends BaseWidgetState<ArticlesListWidget, ArticlesListViewModel> {
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as ArticlesCategory;
+    viewModel.setCategory(args);
+
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              )),
+          centerTitle: true,
+          titleTextStyle: Theme.of(context).textTheme.bodyText1,
+          title: Text(viewModel.title),
           actions: [
             IconButton(
                 onPressed: () {},

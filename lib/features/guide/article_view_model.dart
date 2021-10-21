@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:mobile_endoendo/core/base_view_model.dart';
-import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
+import 'package:mobile_endoendo/features/models/article_ui_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ArticleViewModel extends BaseViewModel {

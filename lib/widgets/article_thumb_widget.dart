@@ -6,8 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mobile_endoendo/core/base_widget_state.dart';
 import 'package:mobile_endoendo/core/extension_functions.dart';
 import 'package:mobile_endoendo/core/values.dart';
-import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/features/guide/article_widget.dart';
+import 'package:mobile_endoendo/features/models/article_ui_model.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
 
 import 'article_thumb_view_model.dart';

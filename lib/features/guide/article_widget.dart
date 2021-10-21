@@ -4,7 +4,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:mobile_endoendo/core/base_widget_state.dart';
 import 'package:mobile_endoendo/core/theme.dart';
 import 'package:mobile_endoendo/core/values.dart';
-import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
+import 'package:mobile_endoendo/features/models/article_ui_model.dart';
 
 import 'article_view_model.dart';
 
