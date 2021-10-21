@@ -27,7 +27,7 @@ class ArticlesRepositoryImpl implements ArticlesRepository {
   @override
   Future<List<Article>> getArticles(String tag) async {
     final articles =
-        (await _articlesApi.where('tags', arrayContains: '').get()).docs.map((doc) => doc.data());
+        (await _articlesApi.where('tags', arrayContains: tag).get()).docs.map((doc) => doc.data());
     return _attachTextToArticles(articles, _articlesFilesRef);
   }
 

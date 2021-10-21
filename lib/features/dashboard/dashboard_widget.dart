@@ -90,7 +90,7 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
     }
 
     final guideTopics =
-        viewModel.getGuideTopics(context).map((category) => _getGuideTile(category)).toList();
+        viewModel.getGuideCategories(context).map((category) => _getGuideTile(category)).toList();
     const itemsPerRow = 3;
     final rowsCount = (guideTopics.length / itemsPerRow).ceil();
 

@@ -7,14 +7,14 @@ import 'package:mobile_endoendo/repositories/articles_repository.dart';
 class ArticlesListViewModel extends BaseViewModel {
   final _articlesRepo = GetIt.I<ArticlesRepository>();
 
-  ArticlesCategory? _category;
+  late ArticlesCategory _category;
 
-  get title => _category?.name ?? '';
+  get title => _category.name;
 
   Future<List<ArticleUiModel>> getArticles() async {
     List<ArticleUiModel> models = List.empty();
     try {
-      var articles = await _articlesRepo.getNews();
+      var articles = await _articlesRepo.getArticles(_category.tag);
       models = articles.map((item) => ArticleUiModel.from(item)).toList();
     } catch (e) {
       rethrow;

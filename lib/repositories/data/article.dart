@@ -1,3 +1,5 @@
+import 'package:mobile_endoendo/core/extension_functions.dart';
+
 class Article {
   final String id;
 
@@ -11,7 +13,7 @@ class Article {
 
   String? text;
 
-  List<String>? tags;
+  List<dynamic>? tags;
 
   Article(
       {required this.id,
@@ -28,9 +30,9 @@ class Article {
             textFile: json['text_file']! as String,
             title: json['title']! as String,
             lead: json['lead']! as String,
-            tags: json['tags'] as List<String>?);
+            tags: (json['tags'] as List<dynamic>?)?.parseStringsList());
 
   Map<String, Object?> toJson() => {
-        //noop
-      };
+    //noop
+  };
 }
