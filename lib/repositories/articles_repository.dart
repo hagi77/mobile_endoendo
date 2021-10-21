@@ -8,6 +8,8 @@ import 'data/article.dart';
 
 abstract class ArticlesRepository {
   Future<List<Article>> getNews();
+
+  Future<List<Article>> getArticles(String tag);
 }
 
 class ArticlesRepositoryImpl implements ArticlesRepository {
@@ -15,26 +17,38 @@ class ArticlesRepositoryImpl implements ArticlesRepository {
       fromFirestore: (snapshot, _) => Article.fromJSON(snapshot.id, snapshot.data()!),
       toFirestore: (article, _) => article.toJson());
 
-  final _filesApi = firebase_storage.FirebaseStorage.instance;
-  late final _newsFilesRef = _filesApi.ref().child('news');
+  final _articlesApi = FirebaseFirestore.instance.collection('articles').withConverter<Article>(
+      fromFirestore: (snapshot, _) => Article.fromJSON(snapshot.id, snapshot.data()!),
+      toFirestore: (article, _) => article.toJson());
+
+  late final _newsFilesRef = firebase_storage.FirebaseStorage.instance.ref().child('news');
+  late final _articlesFilesRef = firebase_storage.FirebaseStorage.instance.ref().child('articles');
+
+  @override
+  Future<List<Article>> getArticles(String tag) async {
+    final articles =
+        (await _articlesApi.where('tags', arrayContains: '').get()).docs.map((doc) => doc.data());
+    return _attachTextToArticles(articles, _articlesFilesRef);
+  }
 
   @override
   Future<List<Article>> getNews() async {
     final articles = (await _newsThumbsApi.get()).docs.map((doc) => doc.data());
-
-    Map<Article, Future<Uint8List?>> futures = {};
-
-    for (var article in articles) {
-      futures.putIfAbsent(article, () => _getNewsArticle(article.textFile));
-    }
-
-    return _getStream(futures).toList();
+    return _attachTextToArticles(articles, _newsFilesRef);
   }
 
-  Future<Uint8List?> _getNewsArticle(String filename) async =>
-      _newsFilesRef.child(filename).getData();
+  Future<List<Article>> _attachTextToArticles(
+      Iterable<Article> documents, firebase_storage.Reference api) async {
+    Map<Article, Future<Uint8List?>> futures = {};
 
-  Stream<Article> _getStream(Map<Article, Future<Uint8List?>> map) async* {
+    for (var document in documents) {
+      futures.putIfAbsent(document, () => api.child(document.textFile).getData());
+    }
+
+    return _fillArticles(futures).toList();
+  }
+
+  Stream<Article> _fillArticles(Map<Article, Future<Uint8List?>> map) async* {
     for (var item in map.entries) {
       var result = await item.value;
       var article = item.key;
