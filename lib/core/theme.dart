@@ -9,7 +9,7 @@ const textThemes = TextTheme(
   headline3: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700, color: primaryTextColor),
   bodyText1: TextStyle(fontSize: 16.0, color: primaryTextColor),
   bodyText2: TextStyle(fontSize: 14.0, color: primaryTextColor),
-  caption: TextStyle(fontSize: 12.0, color: primaryTextColor),
+  caption: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w300, color: primaryTextColor),
 );
 
 MarkdownStyleSheet getMarkdownStyleSheet(BuildContext context) =>

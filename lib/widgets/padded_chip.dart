@@ -12,7 +12,7 @@ class PaddedChip extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
       padding: const EdgeInsets.symmetric(horizontal: marginTiny),
       child: Chip(
-        labelStyle: Theme.of(context).textTheme.bodyText2,
+        labelStyle: Theme.of(context).textTheme.caption,
         label: Text(label),
         labelPadding: const EdgeInsets.all(superTiny),
         backgroundColor: chipBgkColor,
