@@ -44,12 +44,12 @@ class _HomeWidgetState extends BaseWidgetState<HomeWidget, HomeViewModel> {
         ));
   }
 
-  Widget _getBody() {
+  Widget? _getBody() {
     switch (viewModel.currentBottomNavigIndex) {
+      case 0:
+        return const DashboardWidget();
       case 1:
         return const ArticlesListWidget();
-      default:
-        return const DashboardWidget();
     }
   }
 }
