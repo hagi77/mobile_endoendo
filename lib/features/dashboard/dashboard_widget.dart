@@ -25,26 +25,13 @@ class DashboardWidget extends StatefulWidget {
 class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewModel> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.search,
-                color: Colors.black,
-              ))
-        ],
-      ),
-      body: SingleChildScrollView(
-          child: Padding(
-              padding: const EdgeInsets.only(left: marginRegular, right: marginRegular),
-              child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [_getNewsSection(), ..._getGuideSection(context)]))),
-      bottomNavigationBar: _getBottomNavBar(context),
-    );
+    return SingleChildScrollView(
+        child: Padding(
+            padding: const EdgeInsets.only(left: marginRegular, right: marginRegular),
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [_getNewsSection(), ..._getGuideSection(context)])));
   }
 
   FutureBuilder<List<ArticleUiModel>> _getNewsSection() {
@@ -145,19 +132,5 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
                 textAlign: TextAlign.center))
       ]),
     ));
-  }
-
-  BottomNavigationBar _getBottomNavBar(BuildContext context) {
-    return BottomNavigationBar(
-      items: [
-        BottomNavigationBarItem(
-            icon: const Icon(Icons.home), label: AppLocalizations.of(context)?.appBarHome),
-        BottomNavigationBarItem(
-            icon: const Icon(Icons.menu_book_outlined),
-            label: AppLocalizations.of(context)?.appBarGuide),
-        BottomNavigationBarItem(
-            icon: const Icon(Icons.favorite), label: AppLocalizations.of(context)?.appBarFavorites),
-      ],
-    );
   }
 }
