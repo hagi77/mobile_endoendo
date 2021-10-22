@@ -23,8 +23,8 @@ class NetworkImageBuilder extends StatelessWidget {
               child: Image(
                 image: MemoryImage(snapshot.data as Uint8List),
                 fit: BoxFit.fitHeight,
-                width: 76,
-                height: 76,
+                width: 79,
+                height: 79,
               ),
               duration: const Duration(milliseconds: shortAnim),
             );
@@ -35,8 +35,8 @@ class NetworkImageBuilder extends StatelessWidget {
           } else {
             return AnimatedSwitcher(
               child: Container(
-                width: 76,
-                height: 76,
+                width: 79,
+                height: 79,
                 padding: const EdgeInsets.all(marginSmall),
                 alignment: Alignment.center,
                 child: const CircularProgressIndicator.adaptive(),
