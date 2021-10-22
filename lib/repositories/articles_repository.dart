@@ -10,6 +10,8 @@ abstract class ArticlesRepository {
   Future<List<Article>> getNews();
 
   Future<List<Article>> getArticles(String tag);
+
+  Future<List<Article>> getAllArticles();
 }
 
 class ArticlesRepositoryImpl implements ArticlesRepository {
@@ -23,6 +25,12 @@ class ArticlesRepositoryImpl implements ArticlesRepository {
 
   late final _newsFilesRef = firebase_storage.FirebaseStorage.instance.ref().child('news');
   late final _articlesFilesRef = firebase_storage.FirebaseStorage.instance.ref().child('articles');
+
+  @override
+  Future<List<Article>> getAllArticles() async {
+    final articles = (await _articlesApi.get()).docs.map((doc) => doc.data());
+    return _attachTextToArticles(articles, _articlesFilesRef);
+  }
 
   @override
   Future<List<Article>> getArticles(String tag) async {

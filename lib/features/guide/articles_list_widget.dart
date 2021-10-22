@@ -23,29 +23,11 @@ class ArticlesListWidget extends StatefulWidget {
 class _ArticlesListWidgetState extends BaseWidgetState<ArticlesListWidget, ArticlesListViewModel> {
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as ArticlesCategory;
+    final args = ModalRoute.of(context)!.settings.arguments as ArticlesCategory?;
     viewModel.setCategory(args);
 
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-              )),
-          centerTitle: true,
-          titleTextStyle: Theme.of(context).textTheme.bodyText1,
-          title: Text(viewModel.title),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.search,
-                  color: Colors.black,
-                ))
-          ],
-        ),
+        appBar: _getAppBar(context),
         body: FutureBuilder(
             future: viewModel.getArticles(),
             builder: (BuildContext context, AsyncSnapshot<List<ArticleUiModel>> snapshot) {
@@ -62,5 +44,29 @@ class _ArticlesListWidgetState extends BaseWidgetState<ArticlesListWidget, Artic
               }
               return const ProgressWidget();
             }));
+  }
+
+  AppBar? _getAppBar(BuildContext context) {
+    if (viewModel.hasCategory) {
+      return AppBar(
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
+        centerTitle: true,
+        titleTextStyle: Theme.of(context).textTheme.bodyText1,
+        title: Text(viewModel.title),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.search,
+                color: Colors.black,
+              ))
+        ],
+      );
+    }
   }
 }

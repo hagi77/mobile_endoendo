@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mobile_endoendo/core/base_widget_state.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_widget.dart';
+import 'package:mobile_endoendo/features/guide/articles_list_widget.dart';
 import 'package:mobile_endoendo/features/home/home_view_model.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -26,8 +27,10 @@ class _HomeWidgetState extends BaseWidgetState<HomeWidget, HomeViewModel> {
                 ))
           ],
         ),
-        body: const DashboardWidget(),
+        body: _getBody(),
         bottomNavigationBar: BottomNavigationBar(
+          onTap: (index) => viewModel.onBottomNavigation(index),
+          currentIndex: viewModel.currentBottomNavigIndex,
           items: [
             BottomNavigationBarItem(
                 icon: const Icon(Icons.home), label: AppLocalizations.of(context)?.appBarHome),
@@ -39,5 +42,14 @@ class _HomeWidgetState extends BaseWidgetState<HomeWidget, HomeViewModel> {
                 label: AppLocalizations.of(context)?.appBarFavorites),
           ],
         ));
+  }
+
+  Widget _getBody() {
+    switch (viewModel.currentBottomNavigIndex) {
+      case 1:
+        return const ArticlesListWidget();
+      default:
+        return const DashboardWidget();
+    }
   }
 }
