@@ -12,7 +12,7 @@ List<ArticlesCategory> generateCategories(BuildContext context) => [
       ArticlesCategory(AppLocalizations.of(context)?.dashboardGuideTopicSymptoms ?? '', 'diagnoza'),
       ArticlesCategory(AppLocalizations.of(context)?.dashboardGuideTopicDiet ?? '', 'dieta'),
       ArticlesCategory(
-          AppLocalizations.of(context)?.dashboardGuideTopicFertility ?? '', 'plodność'),
+          AppLocalizations.of(context)?.dashboardGuideTopicFertility ?? '', 'płodność'),
       ArticlesCategory(
           AppLocalizations.of(context)?.dashboardGuideTopicTreatment ?? '', 'leczenie'),
       ArticlesCategory(

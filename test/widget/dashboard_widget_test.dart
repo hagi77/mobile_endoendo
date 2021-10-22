@@ -53,13 +53,15 @@ void main() {
               imageFile: 'url',
               title: 'mock title 1',
               lead: 'mock subtitle 1',
-              textFile: 'text'),
+              textFile: 'text',
+              tags: List.empty()),
           Article(
               id: '2',
               imageFile: 'url2',
               title: 'mock title 2',
               lead: 'mock subtitle 2',
-              textFile: 'text'),
+              textFile: 'text',
+              tags: List.empty()),
         })));
 
     await initDI();
@@ -97,13 +99,15 @@ void main() {
               imageFile: 'url',
               title: 'mock title 1',
               lead: 'mock subtitle 1',
-              textFile: 'text'),
+              textFile: 'text',
+              tags: List.empty()),
           Article(
               id: '2',
               imageFile: 'url2',
               title: 'mock title 2',
               lead: 'mock subtitle 2',
-              textFile: 'text'),
+              textFile: 'text',
+              tags: List.empty()),
         })));
 
     await initDI();

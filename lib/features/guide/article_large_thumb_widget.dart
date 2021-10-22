@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobile_endoendo/core/base_widget_state.dart';
-import 'package:mobile_endoendo/core/theme.dart';
 import 'package:mobile_endoendo/core/values.dart';
 import 'package:mobile_endoendo/features/guide/article_widget.dart';
 import 'package:mobile_endoendo/features/models/article_ui_model.dart';
 import 'package:mobile_endoendo/widgets/network_image_builder.dart';
 import 'package:mobile_endoendo/widgets/outlined_card.dart';
+import 'package:mobile_endoendo/widgets/padded_chip.dart';
 
 import 'article_large_thumb_view_model.dart';
 
@@ -47,7 +47,8 @@ class _ArticleLargeThumbnailWidgetState
                           child: Text(
                             viewModel.title,
                             style: Theme.of(context).textTheme.headline3,
-                            maxLines: 1,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           )),
                       Padding(
                           padding:
@@ -55,7 +56,7 @@ class _ArticleLargeThumbnailWidgetState
                           child: Text(
                             viewModel.subtitle,
                             style: Theme.of(context).textTheme.bodyText2,
-                            maxLines: 2,
+                            maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                           ))
                     ],
@@ -65,17 +66,12 @@ class _ArticleLargeThumbnailWidgetState
                 ],
               ),
               if (viewModel.hasTags)
-                Row(
-                  children: [
-                    ...viewModel.tags.map((tag) => Padding(
-                        padding: const EdgeInsets.all(marginTiny),
-                        child: Chip(
-                          labelStyle: Theme.of(context).textTheme.bodyText2,
-                          label: Text(tag),
-                          labelPadding: const EdgeInsets.all(superTiny),
-                          backgroundColor: chipBgkColor,
-                        )))
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: marginTiny, right: marginTiny, bottom: marginTiny),
+                  child: Row(
+                    children: [...viewModel.tags.map((tag) => PaddedChip(label: tag))],
+                  ),
                 )
             ])),
       );

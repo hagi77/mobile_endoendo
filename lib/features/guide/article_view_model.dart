@@ -11,6 +11,10 @@ class ArticleViewModel extends BaseViewModel {
 
   Uint8List? get headerImage => _uiModel.leadImage;
 
+  bool get hasTags => _uiModel.tags.isNotEmpty;
+
+  List<String> get tags => _uiModel.tags;
+
   void setArticle(ArticleUiModel args) {
     _uiModel = args;
   }
