@@ -8,10 +8,12 @@ class ArticleUiModel {
   final String leadImageFile;
   Uint8List? leadImage;
   final String text;
+  final List<String> tags;
 
   ArticleUiModel.from(Article data)
       : title = data.title,
         subtitle = data.lead,
         leadImageFile = data.imageFile,
-        text = data.text ?? "";
+        text = data.text ?? "",
+        tags = data.tags;
 }

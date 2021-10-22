@@ -4,19 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_endoendo/features/authenticate/login_view_model.dart';
+import 'package:mobile_endoendo/features/dashboard/article_thumb_view_model.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/features/guide/article_view_model.dart';
 import 'package:mobile_endoendo/features/guide/article_widget.dart';
 import 'package:mobile_endoendo/features/guide/articles_list_view_model.dart';
 import 'package:mobile_endoendo/repositories/articles_repository.dart';
 import 'package:mobile_endoendo/repositories/images_repository.dart';
-import 'package:mobile_endoendo/widgets/article_thumb_view_model.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
 import 'package:mobile_endoendo/widgets/progress_widget.dart';
 
 import 'core/theme.dart';
 import 'features/authenticate/login_widget.dart';
 import 'features/dashboard/dashboard_widget.dart';
+import 'features/guide/article_large_thumb_view_model.dart';
 import 'features/guide/articles_list_widget.dart';
 
 void main() {
@@ -36,6 +37,7 @@ Future<void> setupDI() {
   GetIt.I.registerSingletonWithDependencies<ArticleViewModel>(() => ArticleViewModel(),
       dependsOn: [ArticlesRepository]);
   GetIt.I.registerFactory<ArticleThumbViewModel>(() => ArticleThumbViewModel());
+  GetIt.I.registerFactory<ArticleLargeThumbViewModel>(() => ArticleLargeThumbViewModel());
   GetIt.I.registerFactory<ArticlesListViewModel>(() => ArticlesListViewModel());
   GetIt.I.registerSingleton<LoginViewModel>(LoginViewModel());
 

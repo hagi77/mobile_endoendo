@@ -13,7 +13,7 @@ class Article {
 
   String? text;
 
-  List<dynamic>? tags;
+  List<String> tags;
 
   Article(
       {required this.id,
@@ -21,7 +21,7 @@ class Article {
       required this.textFile,
       required this.title,
       required this.lead,
-      this.tags});
+      required this.tags});
 
   Article.fromJSON(String articleId, Map<String, Object?> json)
       : this(
@@ -30,7 +30,7 @@ class Article {
             textFile: json['text_file']! as String,
             title: json['title']! as String,
             lead: json['lead']! as String,
-            tags: (json['tags'] as List<dynamic>?)?.parseStringsList());
+            tags: (json['tags'] as List<dynamic>?).parseStringsList());
 
   Map<String, Object?> toJson() => {
     //noop

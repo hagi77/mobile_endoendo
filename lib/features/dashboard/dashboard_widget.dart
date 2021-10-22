@@ -9,10 +9,11 @@ import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/features/guide/articles_list_widget.dart';
 import 'package:mobile_endoendo/features/models/article_ui_model.dart';
 import 'package:mobile_endoendo/features/models/articles_category_model.dart';
-import 'package:mobile_endoendo/widgets/article_thumb_widget.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
 import 'package:mobile_endoendo/widgets/outlined_card.dart';
 import 'package:mobile_endoendo/widgets/progress_widget.dart';
+
+import 'article_thumb_widget.dart';
 
 class DashboardWidget extends StatefulWidget {
   const DashboardWidget({Key? key}) : super(key: key);

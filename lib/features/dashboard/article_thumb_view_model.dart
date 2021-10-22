@@ -8,16 +8,16 @@ import 'package:mobile_endoendo/repositories/images_repository.dart';
 class ArticleThumbViewModel extends BaseViewModel {
   final _imagesRepo = GetIt.I<ImagesRepository>();
 
-  late final ArticleUiModel _uiModel;
+  late final ArticleUiModel uiModel;
 
-  String get title => _uiModel.title;
+  String get title => uiModel.title;
 
-  String get subtitle => _uiModel.subtitle;
+  String get subtitle => uiModel.subtitle;
 
   void setData(ArticleUiModel uiModel) {
-    _uiModel = uiModel;
+    this.uiModel = uiModel;
   }
 
   Future<Uint8List?> getImage() =>
-      _imagesRepo.getImage(_uiModel.leadImageFile).then((value) => _uiModel.leadImage = value);
+      _imagesRepo.getImage(uiModel.leadImageFile).then((value) => uiModel.leadImage = value);
 }

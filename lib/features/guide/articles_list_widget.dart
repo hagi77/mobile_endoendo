@@ -6,9 +6,10 @@ import 'package:mobile_endoendo/core/values.dart';
 import 'package:mobile_endoendo/features/guide/articles_list_view_model.dart';
 import 'package:mobile_endoendo/features/models/article_ui_model.dart';
 import 'package:mobile_endoendo/features/models/articles_category_model.dart';
-import 'package:mobile_endoendo/widgets/article_thumb_widget.dart';
 import 'package:mobile_endoendo/widgets/exception_widget.dart';
 import 'package:mobile_endoendo/widgets/progress_widget.dart';
+
+import 'article_large_thumb_widget.dart';
 
 class ArticlesListWidget extends StatefulWidget {
   static const routeName = '/articles_list';
@@ -53,7 +54,7 @@ class _ArticlesListWidgetState extends BaseWidgetState<ArticlesListWidget, Artic
                   padding: const EdgeInsets.only(left: marginRegular, right: marginRegular),
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      ArticleThumbnailWidget(snapshot.data![index]),
+                      ArticleLargeThumbnailWidget(snapshot.data![index]),
                 );
               }
               if (snapshot.hasError) {
