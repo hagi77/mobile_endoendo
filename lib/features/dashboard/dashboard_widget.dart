@@ -123,7 +123,7 @@ class _DashboardState extends BaseWidgetState<DashboardWidget, DashboardViewMode
         child: InkWell(
       onTap: () => Navigator.pushNamed(context, ArticlesListWidget.routeName, arguments: category),
       child: Column(children: [
-        Image.asset('lib/images/placeholder.jpg'),
+        Image.asset('images/placeholder.jpg'),
         Padding(
             padding: const EdgeInsets.all(marginSmall),
             child: Text(category.name,

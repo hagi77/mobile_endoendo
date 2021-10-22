@@ -32,7 +32,7 @@ class _ArticleWidgetState extends BaseWidgetState<ArticleWidget, ArticleViewMode
       );
     } else {
       headerImage = Image.asset(
-        'lib/images/placeholder.jpg',
+        'images/placeholder.jpg',
         fit: BoxFit.cover,
       );
     }

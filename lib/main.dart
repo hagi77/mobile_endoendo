@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: surfaceColor,
         scaffoldBackgroundColor: surfaceColor,
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
-        fontFamily: 'Roboto',
+        fontFamily: 'Lato',
         textTheme: textThemes,
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,

@@ -4,9 +4,9 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'values.dart';
 
 const textThemes = TextTheme(
-  headline1: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold, color: primaryTextColor),
-  headline2: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: primaryTextColor),
-  headline3: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: primaryTextColor),
+  headline1: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700, color: primaryTextColor),
+  headline2: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700, color: primaryTextColor),
+  headline3: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700, color: primaryTextColor),
   bodyText1: TextStyle(fontSize: 16.0, color: primaryTextColor),
   bodyText2: TextStyle(fontSize: 14.0, color: primaryTextColor),
   caption: TextStyle(fontSize: 12.0, color: primaryTextColor),
