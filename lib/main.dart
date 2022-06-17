@@ -6,7 +6,6 @@ import 'package:get_it/get_it.dart';
 import 'package:mobile_endoendo/features/authenticate/login_view_model.dart';
 import 'package:mobile_endoendo/features/dashboard/article_thumb_view_model.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
-import 'package:mobile_endoendo/features/guide/article_view_model.dart';
 import 'package:mobile_endoendo/features/guide/article_widget.dart';
 import 'package:mobile_endoendo/features/guide/articles_list_view_model.dart';
 import 'package:mobile_endoendo/features/home/home_view_model.dart';
@@ -34,8 +33,6 @@ Future<void> setupDI() {
       dependsOn: [FirebaseApp]);
 
   GetIt.I.registerSingletonWithDependencies<DashboardViewModel>(() => DashboardViewModel(),
-      dependsOn: [ArticlesRepository]);
-  GetIt.I.registerSingletonWithDependencies<ArticleViewModel>(() => ArticleViewModel(),
       dependsOn: [ArticlesRepository]);
   GetIt.I.registerFactory<ArticleThumbViewModel>(() => ArticleThumbViewModel());
   GetIt.I.registerFactory<ArticleLargeThumbViewModel>(() => ArticleLargeThumbViewModel());

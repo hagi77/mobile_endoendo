@@ -11,7 +11,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_view_model.dart';
 import 'package:mobile_endoendo/features/dashboard/dashboard_widget.dart';
-import 'package:mobile_endoendo/features/guide/article_view_model.dart';
 import 'package:mobile_endoendo/features/guide/article_widget.dart';
 import 'package:mobile_endoendo/repositories/articles_repository.dart';
 import 'package:mobile_endoendo/repositories/data/article.dart';
@@ -39,7 +38,6 @@ void main() {
   Future<void> initDI() async {
     await GetIt.I.reset();
 
-    GetIt.I.registerSingleton<ArticleViewModel>(ArticleViewModel());
     GetIt.I.registerSingletonAsync<ArticlesRepository>(() async => mockRepo);
     GetIt.I.registerSingletonWithDependencies<DashboardViewModel>(() => DashboardViewModel(),
         dependsOn: [ArticlesRepository]);
